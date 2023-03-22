@@ -18,7 +18,7 @@ and then run the following after sourcing `devel/setup.bash` and running `roscor
 - `rosrun segwayrmp SmartCar`
 - `rosrun segwayrmp drive_segway_sample`
 
-
+Note: For isolated builds, use [`catkin_make_isolated`](https://ros.org/reps/rep-0134.html) 
 
 ## 2 Main File Path Description
 
