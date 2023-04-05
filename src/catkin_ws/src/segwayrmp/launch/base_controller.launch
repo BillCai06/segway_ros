@@ -1,0 +1,4 @@
+<launch>
+    <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
+    <!-- <node name="RobotOdoemtry" pkg="segwayrmp" type="RobotOdoemtry" output="screen"/> -->
+</launch>

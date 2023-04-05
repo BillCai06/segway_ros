@@ -4,7 +4,7 @@
   <!--<include file="$(find segwayrmp)/launch/ninebot_gx_configuration.launch" />-->
 
   <!-- Run the map server -->
- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/mymap.pgm my_map_resolution"/>
+ <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/mymap.pgm my_map_resolution"/> -->
  <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/mymap.yaml"/> 
 
   <!--move base-->
