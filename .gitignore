@@ -1,5 +1,3 @@
-src/
-!src/catkin_ws_ros1_401plus_v2027_hv01
 devel/
 build/
 logs/

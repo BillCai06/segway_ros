@@ -1,0 +1,11 @@
+<launch>
+<!--设定工作空间为RMP-->
+<group ns="RMP">
+<!--启动SmartCar节点-->
+    <node pkg="segwayrmp" type="SmartCar" name="SmartCar" args="" output="screen"/>
+    	<!--设定偏置系数-->
+        <param name="distance_offset" type="double" value="1.072" />
+        <param name="theta_offset" type="double" value="1.19" />
+    </node>
+</group>
+</launch>
