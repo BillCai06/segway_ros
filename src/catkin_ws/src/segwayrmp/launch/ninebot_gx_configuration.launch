@@ -6,6 +6,6 @@
 
   <!-- Robot && Odomtry -->
   <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
-  <node name="RobotOdoemtry" pkg="segwayrmp" type="RobotOdoemtry" output="screen"/>
+  <!-- <node name="RobotOdoemtry" pkg="segwayrmp" type="RobotOdoemtry" output="screen"/> -->
 
 </launch>
