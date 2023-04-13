@@ -1,0 +1,36 @@
+<launch>
+  <!-- Velodyne VLP-16 driver -->
+ <arg name="calibration" default="/opt/ros/noetic/share/velodyne_pointcloud/params/VLP16db.yaml"/>
+
+  <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
+    <arg name="calibration" value="$(arg calibration)"/>
+
+
+  </include>
+
+  <!-- Point cloud to LaserScan conversion -->
+  <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+    <param name="target_frame" value="base_link"/>
+    <param name="transform_tolerance" value="0.01"/>
+    <param name="min_height" value="0.1"/>
+    <param name="max_height" value="1.0"/>
+    <param name="angle_min" value="-3.14159"/>
+    <param name="angle_max" value="3.14159"/>
+    <param name="angle_increment" value="0.0087"/>
+    <param name="scan_time" value="0.1"/>
+    <param name="range_min" value="0.2"/>
+    <param name="range_max" value="100.0"/>
+    <param name="use_inf" value="true"/>
+    <param name="inf_epsilon" value="1.0"/>
+    <remap from="cloud_in" to="velodyne_points"/>
+    <remap from="scan" to="scan"/>
+
+  </node>
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="vlp16_to_base_link" args="0.0 0.0 0.0 0.0 0.0 0.0 base_link velodyne 100"/> -->
+<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_to_base_link" args="0.0 0.0 0.0 0.0 0.0 0.0 velodyne base_link"/> -->
+ <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
+    args="0.0 0.0 0.2 3.14 0.0 0.0 /base_footprint /laser 40" /> -->
+<node pkg="tf" type="static_transform_publisher" name="velodyne_to_base_link" args="0.0 0.0 0.0 0.0 0.0 0.0 base_link velodyne  10"/>
+<!-- <node pkg="tf" type="static_transform_publisher" name="velodyne_to_base_footprint" args="0 0 0.5 0 0 0 base_footprint velodyne 50" /> -->
+</launch>

@@ -1,4 +1,6 @@
 <launch>
-    <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
+    <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen">
+            <param name="SERIAL_INTERFACE" value="/dev/segway"/>
+    </node>
     <!-- <node name="RobotOdoemtry" pkg="segwayrmp" type="RobotOdoemtry" output="screen"/> -->
 </launch>

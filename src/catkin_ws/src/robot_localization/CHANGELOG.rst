@@ -2,37 +2,40 @@
 Changelog for package robot_localization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.4.3 (2018-04-11)
+3.3.2 (2022-12-11)
 ------------------
-* Add published accel topic to documentation
-* Adding log statements for nans in the invertable matrix
-* Fixing issue with potential seg fault
-* Contributors: Oleg Kalachev, Tom Moore, stevemacenski
+* Port PR `#753 <https://github.com/cra-ros-pkg/robot_localization/issues/753>`_ and `#728 <https://github.com/cra-ros-pkg/robot_localization/issues/728>`_ to ROS2 version (`#765 <https://github.com/cra-ros-pkg/robot_localization/issues/765>`_)
+  * compiling version of commit `#753 <https://github.com/cra-ros-pkg/robot_localization/issues/753>`_ and `#728 <https://github.com/cra-ros-pkg/robot_localization/issues/728>`_ ported to ros2 rolling
+  * format fixes
+  * fix time source disagreement by converting to seconds beforehand, append parameter usage, fix linting
+  * fix linting and uncrustify
+* Adding support for setting diagonals for covariance matrices (`#755 <https://github.com/cra-ros-pkg/robot_localization/issues/755>`_)
+* Fixing and cleaning up interface tests (`#754 <https://github.com/cra-ros-pkg/robot_localization/issues/754>`_)
+  * Fixing and cleaning up interface tests
+* Linting and header cleanup, part 1 (`#752 <https://github.com/cra-ros-pkg/robot_localization/issues/752>`_)
+  * Header cleanup and logging fixes
+* UKF update (`#751 <https://github.com/cra-ros-pkg/robot_localization/issues/751>`_)
+  * Pulling UKF changes from Noetic
+  * Adding a reset service to make tests more deterministic
+* Fix angles dependency (`#747 <https://github.com/cra-ros-pkg/robot_localization/issues/747>`_)
+  * Add angles to CMakeLists.txt
+* Using angles library to normalize angles (`#739 <https://github.com/cra-ros-pkg/robot_localization/issues/739>`_)
+  * Using angles library for innovation angle normalization
+* Read predict_to_current_time from ROS parameters (`#737 <https://github.com/cra-ros-pkg/robot_localization/issues/737>`_)
+  Co-authored-by: Zygfryd Wieszok <zwieszok@autonomous-systems.pl>
+* Fixed state history reversion (`#736 <https://github.com/cra-ros-pkg/robot_localization/issues/736>`_)
+  Co-authored-by: Zygfryd Wieszok <zwieszok@autonomous-systems.pl>
+* Fixing code style divergence for ament_uncrustify in main ROS2 branch (`#743 <https://github.com/cra-ros-pkg/robot_localization/issues/743>`_)
+* This fixes `#732 <https://github.com/cra-ros-pkg/robot_localization/issues/732>`_ (broadcast_cartesian_transform) (`#733 <https://github.com/cra-ros-pkg/robot_localization/issues/733>`_)
+* Contributors: Anish, Haoguang Yang, Marek Piechula, RoboTech Vision, Tom Moore, Tony Najjar, Zygfryd Wieszok
 
-2.4.2 (2018-01-03)
+3.3.1 (2022-02-25)
 ------------------
-* Fixing CMakeLists
-* Contributors: Tom Moore
-
-2.4.1 (2017-12-15)
-------------------
-* Fixing datum precision
-* Fixing state history reversion
-* Silencing unnecessary errors and warnings
-* Fixing critical bug with dynamic process noise covariance
-* Some trivial changes to lessen the differences to lunar
-* Fix typo in reading Mahalanobis thresholds.
-* Zero out rotation in GPS to base_link transform
-* Update xmlrpcpp includes for Indigo support
-* Removing lastUpdateTime
-* Fixing timestamps in map->odom transform
-* Simplify enabledAtStartup logic
-* Add std_srvs dependency
-* Add enabling service
-* Ensure all raw sensor input orientations are normalized even if messages are not
-* Install params directory
-* Add robot localization estimator
-* Contributors: Jacob Perron, Jacob Seibert, Jiri Hubacek, Mike Purvis, Miquel Massot, Pavlo Kolomiiets, Rein Appeldoorn, Rokus Ottervanger, Tom Moore, stevemacenski
+* Moving to C++17 support (`#725 <https://github.com/cra-ros-pkg/robot_localization/issues/725>`_)
+* SHARED linking for Geographiclib (`#624 <https://github.com/cra-ros-pkg/robot_localization/issues/624>`_) (`#712 <https://github.com/cra-ros-pkg/robot_localization/issues/712>`_)
+  * remove GeographicLib specific linking option
+  Co-authored-by: Achmad Fathoni <fathoni.id@gmail.com>
+* Contributors: Stephan Sundermann, Tom Moore
 
 2.4.0 (2017-06-12)
 ------------------

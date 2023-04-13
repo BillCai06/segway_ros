@@ -228,7 +228,11 @@ add_executable(SmartCar
   src/SmartCar.cpp
   src/robot.cpp
   src/Ge_encoder_odometry.cpp
+
 )
+add_executable(odom_base_link_tf_node src/odom_base_link_tf_node.cpp)
+target_link_libraries(odom_base_link_tf_node ${catkin_LIBRARIES})
+
 # add_executable(Enablecar
 #   tools/Enablecar.cpp
 # )
