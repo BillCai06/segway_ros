@@ -5,7 +5,7 @@
   <!-- <node pkg="segwayrmp" type="odom_base_link_tf_node" name="odom_base_link_tf_node" output="screen" /> -->
   <!-- Run the map server -->
  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/mymap.pgm my_map_resolution"/> -->
- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/my_map.yaml"/> 
+ <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/git.yaml"/> 
 
   <!--move base-->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
