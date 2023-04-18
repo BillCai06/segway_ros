@@ -1,0 +1,7 @@
+  <launch>
+   <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
+<!-- <node pkg="segwayrmp" type="odom_base_link_tf_node" name="odom_base_link_tf_node" output="screen" /> -->
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />
+  -->
+  </launch>

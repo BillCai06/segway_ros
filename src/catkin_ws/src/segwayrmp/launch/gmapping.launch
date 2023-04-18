@@ -1,7 +1,52 @@
 <launch>
 
+ <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
   <!--启动gmapping-->
-  <include file="$(find gmapping)/launch/gmapping.launch"/> 
+  <arg name="scan_topic" default="scan" />
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="base_footprint"/>
+    <param name="odom_frame" value="odom"/>
+    <param name="map_update_interval" value="10.0"/>
+    <param name="maxUrange" value="6.0"/>
+    <param name="maxRange" value="8.0"/>
+    <param name="sigma" value="0.05"/>
+    <param name="kernelSize" value="1"/>
+    <param name="lstep" value="0.05"/>
+    <param name="astep" value="0.05"/>
+    <param name="iterations" value="5"/>
+    <param name="lsigma" value="0.075"/>
+    <param name="ogain" value="3.0"/>
+    <param name="lskip" value="0"/>
+    <param name="minimumScore" value="100"/>
+    <param name="srr" value="0.01"/>
+    <param name="srt" value="0.02"/>
+    <param name="str" value="0.01"/>
+    <param name="stt" value="0.02"/>
+    <param name="linearUpdate" value="0.5"/>
+    <param name="angularUpdate" value="0.436"/>
+    <param name="temporalUpdate" value="-1.0"/>
+    <param name="resampleThreshold" value="0.5"/>
+    <param name="particles" value="80"/>
+  <!--
+    <param name="xmin" value="-50.0"/>
+    <param name="ymin" value="-50.0"/>
+    <param name="xmax" value="50.0"/>
+    <param name="ymax" value="50.0"/>
+  make the starting size small for the benefit of the Android client's memory...
+  -->
+    <param name="xmin" value="-1.0"/>
+    <param name="ymin" value="-1.0"/>
+    <param name="xmax" value="1.0"/>
+    <param name="ymax" value="1.0"/>
+
+    <param name="delta" value="0.05"/>
+    <param name="llsamplerange" value="0.01"/>
+    <param name="llsamplestep" value="0.01"/>
+    <param name="lasamplerange" value="0.005"/>
+    <param name="lasamplestep" value="0.005"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
   <!--启动move base-->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
@@ -9,10 +54,14 @@
     <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/base_local_planner_params.yaml" command="load" />
+    <param name="transform_tolerance" value="3.0" />
+    <param name="temporalUpdate" value="-1.0" />
   </node>
 
   <!-- TF -->
   <!-- static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms -->  
-  <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.5 0 0 0 base_link base_footprint 50" />
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.5 0 0 0 base_link base_footprint 50" /> -->
+<node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />
 
 </launch>
