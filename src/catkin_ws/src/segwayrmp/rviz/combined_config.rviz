@@ -1,0 +1,18 @@
+Visualization Manager:
+  Displays:
+    - Class: rviz/Map
+      Enabled: true
+      Name: Map
+      Topic: /map
+    - Class: rviz/LaserScan
+      Enabled: true
+      Name: Scan
+      Topic: /scan
+    - Class: rviz/Odometry
+      Enabled: true
+      Name: Odom
+      Topic: /odom
+    - Class: rviz/Pose
+      Enabled: true
+      Name: Pose
+      Topic: /pose

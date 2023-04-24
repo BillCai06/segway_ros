@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
     ros::NodeHandle pn("~");
     std::string serial;
-    pn.param<std::string>("segwaySmartCarSerial", serial, "segway");
+    pn.param<std::string>("segwaySmartCarSerial", serial, "ttyUSB0");
 
     if (pn.hasParam("segwaySmartCarSerial")){
         std::string nn;

@@ -430,14 +430,14 @@ bool Chassis::ros_set_chassis_buzzer_cmd_callback(segway_msgs::ros_set_chassis_b
 bool Chassis::ros_set_chassis_enable_cmd_callback(segway_msgs::ros_set_chassis_enable_cmd::Request &req, segway_msgs::ros_set_chassis_enable_cmd::Response &res)
 {
     uint8_t ret;
-    // if (req.ros_set_chassis_enable_cmd == false)
-    // {
-        // ret = set_enable_ctrl(0);
-    // }
-    // else 
-    // {
+    if (req.ros_set_chassis_enable_cmd == false)
+    {
+        ret = set_enable_ctrl(0);
+    }
+    else 
+    {
         ret = set_enable_ctrl(1);
-    // }
+    }
     ROS_INFO("req.ros_set_chassis_enable_cmd:%d, set_enable_ctrl():%d ", req.ros_set_chassis_enable_cmd, ret);
 
     res.chassis_set_chassis_enable_result = ret;
@@ -685,7 +685,7 @@ void Chassis::TimeUpdate1000Hz(const ros::TimerEvent &event)
         odom_trans.child_frame_id = "base_link";
         odom_trans.transform.translation.x = OdomPoseXy.pos_x;
         odom_trans.transform.translation.y = OdomPoseXy.pos_y;
-        odom_trans.transform.translation.y = 0;
+        odom_trans.transform.translation.z = 0;
         odom_trans.transform.rotation = odom_quat;
         odom_broadcaster.sendTransform(odom_trans);
 

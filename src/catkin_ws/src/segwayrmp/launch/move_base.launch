@@ -7,7 +7,7 @@
   <!-- <node pkg="segwayrmp" type="odom_base_link_tf_node" name="odom_base_link_tf_node" output="screen" /> -->
   <!-- Run the map server -->
  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/mymap.pgm my_map_resolution"/> -->
- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/my_map.yaml"/> 
+ <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/map.yaml"/> 
 
     <!-- Move Base Node -->
   <!-- Subscribe: /move_base_simple/goal -->
@@ -15,8 +15,8 @@
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/base_local_planner_params.yaml" command="load" />
     
   </node>
@@ -72,7 +72,7 @@
         <param name="update_min_d" value="0.25"/>
         <param name="update_min_a" value="0.2"/>
         <param name="odom_frame_id" value="odom"/>
-        <param name="base_frame_id" value="base_footprint"/>
+        <param name="base_frame_id" value="base_link"/>
         <param name="global_frame_id" value="map"/>
         <param name="resample_interval" value="0.5"/>
         <!-- Increase tolerance because the computer can get quite busy -->
@@ -88,5 +88,5 @@
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 1 map odom" />
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 1 map odom" /> -->
 </launch>

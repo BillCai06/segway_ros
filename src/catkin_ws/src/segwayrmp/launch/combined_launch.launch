@@ -1,0 +1,19 @@
+<launch>
+<node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/map.yaml"/> 
+
+  <!-- Launch segwayrmp vlp_start.launch -->
+  <include file="$(find segwayrmp)/launch/vlp_start.launch" />
+
+  <!-- Run segwayrmp SmartCar node -->
+  <!-- <node name="SmartCar" pkg="segwayrmp" type="SmartCar" /> -->
+
+  <!-- Launch segwayrmp amcl.launch -->
+  <include file="$(find segwayrmp)/launch/amcl.launch" />
+
+  
+  <!-- Launch segwayrmp test.launch -->
+  <include file="$(find segwayrmp)/launch/test.launch" />
+
+  <!-- Launch Rviz with the required configuration -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find segwayrmp)/rviz/nav.rviz" />
+</launch>

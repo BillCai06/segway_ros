@@ -1,7 +1,9 @@
   <launch>
-   <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
-<!-- <node pkg="segwayrmp" type="odom_base_link_tf_node" name="odom_base_link_tf_node" output="screen" /> -->
-  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />
-  -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load"  />
+    <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find segwayrmp)/param/base_local_planner_params.yaml" command="load" />
+  </node>
   </launch>

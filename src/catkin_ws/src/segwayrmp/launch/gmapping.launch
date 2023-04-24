@@ -54,8 +54,6 @@
     <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/base_local_planner_params.yaml" command="load" />
-    <param name="transform_tolerance" value="3.0" />
-    <param name="temporalUpdate" value="-1.0" />
   </node>
 
   <!-- TF -->
