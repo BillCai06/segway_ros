@@ -15,17 +15,29 @@ bool enableRobot()
     segway_msgs::ros_set_chassis_enable_cmd enable_request;
     enable_request.request.ros_set_chassis_enable_cmd = 1;
 
-    if (ros_set_chassis_enable_cmd_client.call(enable_request))
+    if (!ros_set_chassis_enable_cmd_client.waitForExistence(ros::Duration(5)))
     {
-        ROS_INFO("Robot enabled successfully.");
-        return true;
-    }
-    else
-    {
-        ROS_ERROR("Failed to enable the robot.");
+        ROS_ERROR("Failed to connect to the service within the specified timeout.");
         return false;
     }
+     else
+    {
+        if (ros_set_chassis_enable_cmd_client.call(enable_request))
+        {
+            ROS_INFO("Service call was successful.");
+            return true;
+        }
+    
+        else
+        {
+            ROS_ERROR("Failed to call the service.");
+            return false;
+        }
+    }
 }
+
+   
+
 
 int main(int argc, char **argv)
 {

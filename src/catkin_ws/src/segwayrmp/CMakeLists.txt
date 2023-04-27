@@ -230,9 +230,9 @@ add_executable(SmartCar
   src/Ge_encoder_odometry.cpp
 
 )
-add_executable(Enable 
- src/Enable.cpp)
-target_link_libraries(Enable ${catkin_LIBRARIES})
+add_executable(vel_router
+ src/vel_router.cpp)
+target_link_libraries(vel_router ${catkin_LIBRARIES})
 
 add_executable(odom_base_link_tf_node src/odom_base_link_tf_node.cpp)
 target_link_libraries(odom_base_link_tf_node ${catkin_LIBRARIES})

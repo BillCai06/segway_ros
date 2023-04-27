@@ -438,6 +438,8 @@ bool Chassis::ros_set_chassis_enable_cmd_callback(segway_msgs::ros_set_chassis_e
     {
         ret = set_enable_ctrl(1);
     }
+
+    
     ROS_INFO("req.ros_set_chassis_enable_cmd:%d, set_enable_ctrl():%d ", req.ros_set_chassis_enable_cmd, ret);
 
     res.chassis_set_chassis_enable_result = ret;
