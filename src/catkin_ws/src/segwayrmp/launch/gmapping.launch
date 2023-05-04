@@ -1,12 +1,12 @@
 <launch>
 
- <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/>
+ <!-- <node name="SmartCar" pkg="segwayrmp" type="SmartCar" output="screen"/> -->
   <!--启动gmapping-->
   <arg name="scan_topic" default="scan" />
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
     <param name="base_frame" value="base_footprint"/>
-    <param name="odom_frame" value="odom"/>
+    <param name="odom_frame" value="laser_odom"/>
     <param name="map_update_interval" value="10.0"/>
     <param name="maxUrange" value="6.0"/>
     <param name="maxRange" value="8.0"/>
@@ -48,18 +48,18 @@
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
   <!--启动move base-->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find segwayrmp)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find segwayrmp)/param/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find segwayrmp)/param/base_local_planner_params.yaml" command="load" />
-  </node>
+  </node> -->
 
   <!-- TF -->
-  <!-- static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms -->  
-  <!-- <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.5 0 0 0 base_link base_footprint 50" /> -->
-<node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />
+  <!-- static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms   -->
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.5 0 0 0 base_link base_footprint 50" />
+<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser" args="1 0 0 0 0 0 1 base_link laser" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="1 0 0 0 0 0 1 base_link imu" />  -->
 
 </launch>

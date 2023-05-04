@@ -6,7 +6,10 @@
 
 #define IMU_ANGULAR_VEL_CONVERT_UINIT 0.0009288 //(2000 /32767 / 0.0163835 / 70 / 57.3)//FS:2000dps; 0.0163835/70：coefficient；57.3：rad->degree
 #define IMU_LINEAR_VEL_CONVERT_UINIT 0.0023943  //(9.80665 * 8 /32767 )//FS:8G;
-#define RAD_DEGREE_CONVER            57.2958
+#define RAD_DEGREE_CONVER            57.2958 //wtf???#define RAD_TO_DEG_CONVERSION        57.2958  // (180/π)
+// #define DEG_TO_RAD_CONVERSION        0.0174533 // (π/180)// how about we name as this ? 
+
+
 chassis_motors_speed_data_t motorsSpeedData;
 chassis_car_speed_data_t    carSpeedData;
 uint64_t Speed_TimeStamp;
@@ -128,7 +131,7 @@ ros::Time timestamp2rostime(int64_t timestamp)
     return ros::Time(sec_, nsec_);
 }
 
-double getOrientationX()
+double getOrientationX() //need to be rewrite 
 {
     float x = OdomEulerXy.euler_x / RAD_DEGREE_CONVER / 2.0;
     float y = OdomEulerXy.euler_y / RAD_DEGREE_CONVER / 2.0;
@@ -689,12 +692,12 @@ void Chassis::TimeUpdate1000Hz(const ros::TimerEvent &event)
         odom_trans.transform.translation.y = OdomPoseXy.pos_y;
         odom_trans.transform.translation.z = 0;
         odom_trans.transform.rotation = odom_quat;
-        odom_broadcaster.sendTransform(odom_trans);
+        // odom_broadcaster.sendTransform(odom_trans); // Unrealiable odom from the robot, USE the ODOM form T256. or use the odom_base_link_tf_node 
 
         if ((Odom_TimeStamp - time_pre) > 100000)
         {
             static uint8_t first = 1;
-            if (first)
+            if (first) 
             {
                 first = 0;
             }

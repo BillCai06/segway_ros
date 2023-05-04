@@ -25,7 +25,7 @@
   </node>
 
   <!-- robot_localization -->
-  <include file="$(find robot_localization)/launch/ekf_template.launch">
+  <!-- <include file="$(find robot_localization)/launch/ekf_template.launch">
     <arg name="odom0" value="/odom"/>
     <arg name="odom0_config" value="true true true false false false"/>
     <arg name="imu0" value="/imu"/>
@@ -33,11 +33,11 @@
     <arg name="odom_frame" value="odom"/>
     <arg name="base_link_frame" value="base_link"/>
     <arg name="world_frame" value="odom"/>
-  </include>
+  </include> -->
 
   <!-- gmapping -->
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-    <param name="odom_frame" value="odom"/>
+    <param name="odom_frame" value="laser_odom"/>
     <param name="map_update_interval" value="5.0"/>
     <param name="maxUrange" value="16.0"/>
     <param name="sigma" value="0.05"/>
