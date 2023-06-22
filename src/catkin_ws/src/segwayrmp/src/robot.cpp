@@ -685,13 +685,13 @@ void Chassis::TimeUpdate1000Hz(const ros::TimerEvent &event)
         ROS_odom.twist.twist.angular.y = (double)ImuGyrData.gyr[1] / 900.0;
         ROS_odom.twist.twist.angular.z = (double)ImuGyrData.gyr[2] / 900.0; //* IMU_ANGULAR_VEL_CONVERT_UINIT;
 
-        odom_trans.header.stamp = timestamp2rostime(Odom_TimeStamp);
-        odom_trans.header.frame_id = "odom";
-        odom_trans.child_frame_id = "base_link";
-        odom_trans.transform.translation.x = OdomPoseXy.pos_x;
-        odom_trans.transform.translation.y = OdomPoseXy.pos_y;
-        odom_trans.transform.translation.z = 0;
-        odom_trans.transform.rotation = odom_quat;
+        // odom_trans.header.stamp = timestamp2rostime(Odom_TimeStamp);
+        // odom_trans.header.frame_id = "odom";
+        // odom_trans.child_frame_id = "base_link";
+        // odom_trans.transform.translation.x = OdomPoseXy.pos_x;
+        // odom_trans.transform.translation.y = OdomPoseXy.pos_y;
+        // odom_trans.transform.translation.z = 0;
+        // odom_trans.transform.rotation = odom_quat;
         // odom_broadcaster.sendTransform(odom_trans); // Unrealiable odom from the robot, USE the ODOM form T256. or use the odom_base_link_tf_node 
 
         if ((Odom_TimeStamp - time_pre) > 100000)

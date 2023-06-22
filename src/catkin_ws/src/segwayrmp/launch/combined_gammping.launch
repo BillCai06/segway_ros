@@ -1,11 +1,18 @@
 <launch>
- <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find segwayrmp)/maps/map.yaml"/>  -->
+ 
 
-  <!-- Launch segwayrmp vlp_start.launch -->
-  <include file="$(find segwayrmp)/launch/vlp_start.launch" />
 
   <!-- Run segwayrmp SmartCar node -->
   <node name="SmartCar" pkg="segwayrmp" type="SmartCar" />
+
+ <!-- Run odom_base_link_tf_node -->
+  <!-- <node name="odom_base_link_tf_node" pkg="segwayrmp" type="odom_base_link_tf_node" /> -->
+
+    <!-- Launch segwayrmp rs_t265.launch -->
+  <include file="$(find segwayrmp)/launch/rs_t265.launch" />
+
+    <!-- Launch segwayrmp vlp_start.launch -->
+  <include file="$(find segwayrmp)/launch/vlp_start.launch" />
 
   <!-- Launch the gmapping nodes -->
   <include file="$(find segwayrmp)/launch/gmapping.launch" />
@@ -14,13 +21,10 @@
   <!-- Launch the move_base nodes -->
   <include file="$(find segwayrmp)/launch/move_base.launch" />
   
-  <!-- Run odom_base_link_tf_node -->
-  <node name="odom_base_link_tf_node" pkg="segwayrmp" type="odom_base_link_tf_node" />
+  <!-- Launch Rviz with the required configuration -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find segwayrmp)/rviz/nav.rviz" /> -->
 
   <!-- Run vel_router -->
-  <node name="vel_router" pkg="segwayrmp" type="vel_router" />
-
-
-  <!-- Launch Rviz with the required configuration -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find segwayrmp)/rviz/nav.rviz" />
-<!-- </launch> -->
+  <!-- <node name="vel_router" pkg="segwayrmp" type="vel_router" /> -->
+  
+</launch>

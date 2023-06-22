@@ -49,6 +49,8 @@ add_executable(SmartCar
   src/Ge_encoder_odometry.cpp
 
 )
+
+
 add_executable(vel_router
  src/vel_router.cpp)
 target_link_libraries(vel_router ${catkin_LIBRARIES})
@@ -66,6 +68,10 @@ else()
   set(LIBRARY_NAME "${PROJECT_SOURCE_DIR}/lib/libctrl_x86_64.so")
 endif()
 
+catkin_install_python(PROGRAMS
+  script/maker.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 target_link_libraries(SmartCar
   ${catkin_LIBRARIES} 

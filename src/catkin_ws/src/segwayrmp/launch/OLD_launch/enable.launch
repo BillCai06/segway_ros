@@ -1,7 +1,0 @@
-<launch>
-<!--Set the group RMP-->
-<group ns="RMP">
-<!--enable enablecar nodes-->
-    <node pkg="segwayrmp" type="EnableCar" name="EnableCar" args="" output="screen"/>
-</group>
-</launch>

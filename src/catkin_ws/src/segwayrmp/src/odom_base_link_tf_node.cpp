@@ -15,12 +15,11 @@ void odom_callback(const nav_msgs::Odometry &odom_msg)
 
     // First, we'll publish the transform over tf2
     geometry_msgs::TransformStamped odom_trans;
-    // odom_trans.header.stamp = odom_msg.header.stamp;
-    odom_trans.header.stamp = odom_msg.header.stamp + ros::Duration(1e-9);
+    odom_trans.header.stamp = odom_msg.header.stamp;
+    // odom_trans.header.stamp = odom_msg.header.stamp + ros::Duration(1e-9);
 
-    odom_trans.header.frame_id = "odom";
+    odom_trans.header.frame_id = "base_odom";
     odom_trans.child_frame_id = "base_link";
-    odom_trans.header.frame_id = "odom";
     odom_trans.transform.translation.x = odom_msg.pose.pose.position.x;
     odom_trans.transform.translation.y = odom_msg.pose.pose.position.y;
     odom_trans.transform.translation.z = odom_msg.pose.pose.position.z;
@@ -37,9 +36,9 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "odom_base_link_tf");
     ros::NodeHandle n;
-    ros::Subscriber odom_sub = n.subscribe("odom", 40, odom_callback);
+    ros::Subscriber odom_sub = n.subscribe("base_odom", 40, odom_callback);
 
-    ros::Rate rate(10); // 10 Hz
+    ros::Rate rate(40); // 10 Hz
 
     while (ros::ok())
     {

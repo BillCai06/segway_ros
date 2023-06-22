@@ -15,7 +15,7 @@
   <include file="$(find segwayrmp)/launch/move_base.launch" />
 
     <!-- Run odom_base_link_tf_node -->
-  <node name="odom_base_link_tf_node" pkg="segwayrmp" type="odom_base_link_tf_node" />
+  <!-- <node name="odom_base_link_tf_node" pkg="segwayrmp" type="odom_base_link_tf_node" /> -->
 
   <!-- Run vel_router -->
   <node name="vel_router" pkg="segwayrmp" type="vel_router" />

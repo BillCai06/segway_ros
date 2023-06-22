@@ -1,0 +1,29 @@
+<launch>
+<!-- Velodyne VLP-16 driver -->
+  <arg name="calibration" default="/opt/ros/noetic/share/velodyne_pointcloud/params/VLP16db.yaml"/>
+
+  <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
+    <arg name="calibration" value="$(arg calibration)"/>
+  </include>
+<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+    <param name="target_frame" value="base_link"/> <!-- Output frame for the laser scan -->
+    <param name="transform_tolerance" value="0.01"/> <!-- Tolerance for time sync in seconds -->
+    <param name="min_height" value="0.0"/> <!-- Minimum height of the points in the point cloud to consider for the laser scan -->
+    <param name="max_height" value="1.0"/> <!-- Maximum height of the points in the point cloud to consider for the laser scan -->
+    <param name="angle_min" value="-1.5708"/> <!-- Start angle of the laser scan in radians -->
+    <param name="angle_max" value="1.5708"/> <!-- End angle of the laser scan in radians -->
+    <param name="angle_increment" value="0.0087"/> <!-- Angle between measurements in radians -->
+    <param name="scan_time" value="0.1"/> <!-- Time between scans in seconds -->
+    <param name="range_min" value="0.45"/> <!-- Minimum range of the laser scan in meters -->
+    <param name="range_max" value="100.0"/> <!-- Maximum range of the laser scan in meters -->
+    <param name="use_inf" value="true"/> <!-- Set values out of range to infinity -->
+    <param name="inf_epsilon" value="1.0"/> <!-- Set values below range_min and above range_max to infinity + inf_epsilon -->
+
+    <!-- Remap the point cloud topic and the output laser scan topic -->
+    <remap from="cloud_in" to="/velodyne_points"/>
+    <remap from="scan" to="/scan"/>
+  </node>
+  <node pkg="tf" type="static_transform_publisher" name="velodyne_to_base_link" args="0.25 0.0 0.2 0.0 0.0 0.0 base_link velodyne  40"/>
+  <node pkg="tf" type="static_transform_publisher" name="realsense_to_base_link" args="0.25 0.0 0.2 0.0 0.0 0.0 base_link camera  40"/>
+
+  </launch>

@@ -3,7 +3,47 @@
 This is a docker container that allows us to develop controller for the Segway robot. 
 The following is the summary taken from the package given to us by Segway Robotics. 
 
-## 1 Chassis PC Motion Test
+## 1 How to get started
+This a full navigation package using gmapping and move_base for naviagtion. 
+
+Hardware we Used:
+
+Jetson Orin
+Intel Realsense D455
+Velodyne vlp-16 High-Res 
+Segwayrmp 401Plus
+
+
+Environment setup:
+
+To control the robot:
+
+
+```
+rosrun segwayrmp Smartcar
+rosrun sgewayrmp vel_router
+# any nodes that will pub geometry_msgs to /vel_set 
+```
+Smartcar enable comuunication between the robot and ros, vel_router will enable the robot and republish /vel_set to /cmd_vel. 
+------
+
+How to run the robot with prebuild map:
+
+```
+roslaunch segwayrmp combined_nav.launch 
+
+```
+This will start amcl, move_base, Smartcar and vlp lidar and enable the robot which will sub to /vel_set and then pub to the Smartcar nodes with /cmd_vel,  the odom to base_link is publish by odom_base_link_tf_nodes. 
+------
+How to run the robot with gmapping:
+
+```
+roslaunch segwayrmp combined_gmapping.launch 
+
+```
+This will start gmapping, move_base, Smartcar and vlp lidar and enable the robot which will sub to /vel_set and then pub to the Smartcar nodes with /cmd_vel,the odom to base_link is publish by odom_base_link_tf_nodes. 
+
+
 
 (1) Turn off the remote control; or turn on the remote control, at the same time, enable the lever to move upwards to the PC mode, and make sure that the emergency stop lever is not in the emergency stop state by moving downwards.
 
